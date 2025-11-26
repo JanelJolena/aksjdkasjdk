@@ -1,20 +1,236 @@
+
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> My Unsent Love Letter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ffcce6, #ff99cc);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .envelope {
+            width: 300px;
+            height: 200px;
+            background-color: #ff4d94;
+            position: relative;
+            margin: 0 auto;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .envelope:hover {
+            transform: scale(1.05);
+        }
+        
+        .heart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .heart:before, .heart:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 50%;
+        }
+        
+        .heart:before {
+            top: -40px;
+            left: 0;
+        }
+        
+        .heart:after {
+            top: 0;
+            left: 40px;
+        }
+        
+        .heart-inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background-color: #ff4d94;
+            z-index: 2;
+        }
+        
+        .heart-inner:before, .heart-inner:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: #ff4d94;
+            border-radius: 50%;
+        }
+        
+        .heart-inner:before {
+            top: -20px;
+            left: 0;
+        }
+        
+        .heart-inner:after {
+            top: 0;
+            left: 20px;
+        }
+        
+        .letter {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: scale(0);
+            opacity: 0;
+            transition: all 0.5s ease;
+            z-index: 3;
+            overflow-y: auto;
+        }
+        
+        .letter.open {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .letter-content {
+            text-align: left;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .letter-content h2 {
+            color: #ff4d94;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .letter-content p {
+            margin-bottom: 10px;
+        }
+        
+        .signature {
+            text-align: right;
+            margin-top: 20px;
+            font-style: italic;
+            color: #ff4d94;
+        }
+        
+        .floating-hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .floating-heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            opacity: 0;
+        }
+        
+        .floating-heart:before, .floating-heart:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+        }
+        
+        .floating-heart:before {
+            top: -10px;
+            left: 0;
+        }
+        
+        .floating-heart:after {
+            top: 0;
+            left: 10px;
+        }
+        
+        .instruction {
+            margin-top: 20px;
+            color: white;
+            font-size: 18px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #ff4d94;
+            cursor: pointer;
+            z-index: 4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="envelope" id="envelope">
             <div class="heart">
                 <div class="heart-inner"></div>
             </div>
             <div class="letter" id="letter">
                 <button class="close-btn" id="closeBtn">×</button>
                 <div class="letter-content">
-                    <h2>My unsent love letter</h2>
-                    <p>Haii tui biết là bọn mình kết thúc lâu rồi, tui cũng biết là lời nói yêu lời qtam của tui cũng mất hết giá trị ròi nên cho tui đc nói mấy cday lần cuối nhaa</p>
-                    <p>Giá như tui chậm lại 1 xíu nhỉ thì maybe bây h bọn mình vẫn đang vui vẻ chơi game ròi, tui đc khen bà xinh đc ngắm bà rùi đc iu bà mấy điều đấy làm 3 tháng qua siêu vui. Thời gian chậm lại 1 chút 1 tý nữa thôi tui đc nắm tay bà, đc ôm bà sau xe chắc quý giá lắm đếy</p>
-                    <p>Có 1 sự thật rằng tui vẫn iu bà rất nhiều dù gì cũng mới có 3 tháng à tình cẻm tất nhiên còn nhiều ròi. Dạo này cũng hong ổn lắm nma tui đứng từ xa thấy bà vui nghe con diên kể lại chơi với bà với Qanh vui lém, ui tui nghe vui lắm siu an tâm lun, dù tui vẫn còn luỵ bà nma tui ko biết bà như nào về tui nữa mà chắc ko nữa đâu, dạo này xinh lên đúng khong, chụp ảnh cũng nhiều nữa cơ muốn khen với hun má gheee nma hết cơ hội roi huhu.</p>
-                    <p>Ko đc nắm tay đi lotte nữa ko đc ôm bà đi ngắm bãi sau nữa, đáng đời tui chưa. Này nhá, giữ gìn skhoe đó mà chắc ko cần t nhắc đâu vì bản chất m đã là ng siêu mạnh mẽ rồi. Đừng buồn nữa nhe, mấy nay buồn đúng hong, buồn nhiều xấu gái lắm đấy nhớ, mà chắc ko sao đou bà buồn nhiều mà vẫn xinh r 😔 VUI LENNNN. Tui chưa từng hối hận khi làm gì với bà, 1 lần cuối cùng nữa thôi. Anh yêu em nhiều lắm.                    <div class="signature">
+                    <h2>my unsent love letter</h2>
+                    <p> Haii tui biết là bọn mình kết thúc lâu rồi, tui cũng biết là lời nói yêu lời qtam của tui cũng mất hết giá trị ròi nên cho tui đc nói mấy cday lần cuối nhaa.</p>
+                    <p> Giá như tui chậm lại 1 xíu nhỉ thì maybe bây h bọn mình vẫn đang vui vẻ chơi game ròi, tui đc khen bà xinh đc ngắm bà rùi đc iu bà mấy điều đấy làm 3 tháng qua siêu vui. Thời gian chậm lại 1 chút 1 tý nữa thôi tui đc nắm tay bà, đc ôm bà sau xe chắc quý giá lắm đếy.</p>
+                    <p> Có 1 sự thật rằng tui vẫn iu bà rất nhiều dù gì cũng mới có 3 tháng à tình cẻm tất nhiên còn nhiều ròi. Dạo này cũng hong ổn lắm nma tui đứng từ xa thấy bà vui nghe con diên kể lại chơi với bà với Qanh vui lém, ui tui nghe vui lắm siu an tâm lun, dù tui vẫn còn luỵ bà nma tui ko biết bà như nào về tui nữa mà chắc ko nữa đâu, dạo này xinh lên đúng khong, chụp ảnh cũng nhiều nữa cơ muốn khen với hun má gheee nma hết cơ hội roi huhu. </p>
+                    <p> Ko đc nắm tay đi lotte nữa ko đc ôm bà đi ngắm bãi sau nữa, đáng đời tui chưa. Này nhá, giữ gìn skhoe đó mà chắc ko cần t nhắc đâu vì bản chất m đã là ng siêu mạnh mẽ rồi. Đừng buồn nữa nhe, mấy nay buồn đúng hong, buồn nhiều xấu gái lắm đấy nhớ, mà chắc ko sao đou bà buồn nhiều mà vẫn xinh r 😔 VUI LENNNN. Tui chưa từng hối hận khi làm gì với bà, 1 lần cuối cùng nữa thôi. Anh yêu em nhiều lắm. </p>
+                    <div class="signature">
                         <p>merci, mi amor</p>
                     </div>
                 </div>
             </div>
         </div>
-        <p class="instruction">My unsent loveletter</p>
+        <p class="instruction">my unsent live letter</p>
     </div>
     
     <div class="floating-hearts" id="floatingHearts"></div>
@@ -36,3 +252,53 @@
                     const left = Math.random() * 100;
                     const delay = Math.random() * 5;
                     const duration = 10 + Math.random() * 10;
+                    
+                    heart.style.left = `${left}vw`;
+                    heart.style.animation = `float ${duration}s linear ${delay}s infinite`;
+                    
+                    floatingHearts.appendChild(heart);
+                }
+            }
+            
+            // Thêm CSS animation cho trái tim bay
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes float {
+                    0% {
+                        transform: translateY(100vh) rotate(0deg);
+                        opacity: 0;
+                    }
+                    10% {
+                        opacity: 0.7;
+                    }
+                    90% {
+                        opacity: 0.7;
+                    }
+                    100% {
+                        transform: translateY(-100px) rotate(360deg);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Mở thư
+            envelope.addEventListener('click', function() {
+                letter.classList.add('open');
+                createFloatingHearts();
+            });
+            
+            // Đóng thư
+            closeBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                letter.classList.remove('open');
+            });
+            
+            // Ngăn sự kiện click trên thư lan ra ngoài
+            letter.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+    </script>
+</body>
+</html>
