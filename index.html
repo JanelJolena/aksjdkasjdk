@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -242,13 +239,13 @@
             const closeBtn = document.getElementById('closeBtn');
             const floatingHearts = document.getElementById('floatingHearts');
             
-            // Tạo hiệu ứng trái tim bay
+            // piijnbff
             function createFloatingHearts() {
                 for (let i = 0; i < 15; i++) {
                     const heart = document.createElement('div');
                     heart.classList.add('floating-heart');
                     
-                    // Vị trí ngẫu nhiên
+                    // random ahh
                     const left = Math.random() * 100;
                     const delay = Math.random() * 5;
                     const duration = 10 + Math.random() * 10;
@@ -260,7 +257,7 @@
                 }
             }
             
-            // Thêm CSS animation cho trái tim bay
+            // CSS
             const style = document.createElement('style');
             style.textContent = `
                 @keyframes float {
@@ -282,19 +279,19 @@
             `;
             document.head.appendChild(style);
             
-            // Mở thư
+            // Mở 😭
             envelope.addEventListener('click', function() {
                 letter.classList.add('open');
                 createFloatingHearts();
             });
             
-            // Đóng thư
+            // ddonsg 
             closeBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 letter.classList.remove('open');
             });
             
-            // Ngăn sự kiện click trên thư lan ra ngoài
+            // sửa lỗi lạy bố
             letter.addEventListener('click', function(e) {
                 e.stopPropagation();
             });
@@ -302,4 +299,5 @@
     </script>
 </body>
 </html>
+
 
